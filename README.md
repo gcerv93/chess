@@ -1,0 +1,1 @@
+I will be creating a command line Chess implementation with Ruby. As I build this, I will try to keep in mind some OOP principles, as well as implement testing. I will not be using Test Driven Development, but I do plan to have some unit tests for the important features. 
