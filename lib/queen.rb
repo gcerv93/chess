@@ -8,6 +8,6 @@ class Queen
   end
 
   def to_s
-    @color == 'white' ? "\u2655" : "\u265b"
+    @color == 'white' ? "\u265b".bold : "\u265b".black
   end
 end

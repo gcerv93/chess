@@ -8,6 +8,6 @@ class Bishop
   end
 
   def to_s
-    @color == 'white' ? "\u2657" : "\u265d"
+    @color == 'white' ? "\u265d".bold : "\u265d".black
   end
 end

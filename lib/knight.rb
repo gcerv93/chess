@@ -8,6 +8,6 @@ class Knight
   end
 
   def to_s
-    @color == 'white' ? "\u2658" : "\u265e"
+    @color == 'white' ? "\u265e".bold : "\u265e".black
   end
 end

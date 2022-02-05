@@ -8,6 +8,6 @@ class King
   end
 
   def to_s
-    @color == 'white' ? "\u2654" : "\u265a"
+    @color == 'white' ? "\u265a".bold : "\u265a".black
   end
 end

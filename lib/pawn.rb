@@ -8,6 +8,6 @@ class Pawn
   end
 
   def to_s
-    @color == 'white' ? "\u2659" : "\u265f"
+    @color == 'white' ? "\u265f".bold : "\u265f".black
   end
 end

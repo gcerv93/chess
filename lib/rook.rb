@@ -8,6 +8,6 @@ class Rook
   end
 
   def to_s
-    @color == 'white' ? "\u2656" : "\u265c"
+    @color == 'white' ? "\u265c".bold : "\u265c".black
   end
 end
