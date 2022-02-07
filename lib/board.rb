@@ -14,7 +14,7 @@ class Board
   include Display
   attr_accessor :board
 
-  def initialize(rows, cols)
+  def initialize(rows = 8, cols = 8)
     @board = create_board(rows, cols)
   end
 
@@ -46,6 +46,16 @@ class Board
     else
       board[row][0] = Rook.new(color, [row, 0])
       board[row][7] = Rook.new(color, [row, 7])
+    end
+  end
+
+  def inject_knights(color, row, col = nil)
+    if col
+      board[row][col] = Knight.new(color, [row, col])
+      board[row][col] = Knight.new(color, [row, col])
+    else
+      board[row][1] = Knight.new(color, [row, 1])
+      board[row][6] = Knight.new(color, [row, 6])
     end
   end
 end
