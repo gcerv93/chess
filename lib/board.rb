@@ -29,6 +29,11 @@ class Board
   #   puts '    A  B  C  D  E  F  G  H'
   # end
 
+  def setup_trad_board
+    white_pieces
+    black_pieces
+  end
+
   private
 
   def create_board(rows, cols)
@@ -80,5 +85,23 @@ class Board
     else
       board[row][3] = Queen.new(color, [row, 3])
     end
+  end
+
+  def white_pieces
+    inject_pawns('white', 6)
+    inject_rooks('white', 7)
+    inject_knights('white', 7)
+    inject_bishops('white', 7)
+    inject_queen('white', 7)
+    inject_king('white', 7)
+  end
+
+  def black_pieces
+    inject_pawns('black', 1)
+    inject_rooks('black', 0)
+    inject_knights('black', 0)
+    inject_bishops('black', 0)
+    inject_queen('black', 0)
+    inject_king('black', 0)
   end
 end
