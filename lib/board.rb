@@ -42,7 +42,6 @@ class Board
   def inject_rooks(color, row, col = nil)
     if col
       board[row][col] = Rook.new(color, [row, col])
-      board[row][col] = Rook.new(color, [row, col])
     else
       board[row][0] = Rook.new(color, [row, 0])
       board[row][7] = Rook.new(color, [row, 7])
@@ -52,10 +51,18 @@ class Board
   def inject_knights(color, row, col = nil)
     if col
       board[row][col] = Knight.new(color, [row, col])
-      board[row][col] = Knight.new(color, [row, col])
     else
       board[row][1] = Knight.new(color, [row, 1])
       board[row][6] = Knight.new(color, [row, 6])
+    end
+  end
+
+  def inject_bishops(color, row, col = nil)
+    if col
+      board[row][col] = Bishop.new(color, [row, col])
+    else
+      board[row][2] = Bishop.new(color, [row, 2])
+      board[row][5] = Bishop.new(color, [row, 5])
     end
   end
 end
