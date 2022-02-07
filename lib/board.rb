@@ -29,13 +29,23 @@ class Board
   #   puts '    A  B  C  D  E  F  G  H'
   # end
 
-  def inject_pawns(row, color)
-    board[row] = board[row].map.with_index { |_cell, idx| Pawn.new(color, [row, idx]) }
-  end
-
   private
 
   def create_board(rows, cols)
     Array.new(rows) { Array.new(cols, '') }
+  end
+
+  def inject_pawns(color, row)
+    board[row] = board[row].map.with_index { |_cell, idx| Pawn.new(color, [row, idx]) }
+  end
+
+  def inject_rooks(color, row, col = nil)
+    if col
+      board[row][col] = Rook.new(color, [row, col])
+      board[row][col] = Rook.new(color, [row, col])
+    else
+      board[row][0] = Rook.new(color, [row, 0])
+      board[row][7] = Rook.new(color, [row, 7])
+    end
   end
 end

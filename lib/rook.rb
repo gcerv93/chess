@@ -3,8 +3,9 @@
 # class for the game rooks
 class Rook
   # initialize with instance variable @color to track color of pieces
-  def initialize(color)
+  def initialize(color, location)
     @color = color
+    @location = location
   end
 
   def to_s
