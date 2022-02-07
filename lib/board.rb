@@ -65,4 +65,12 @@ class Board
       board[row][5] = Bishop.new(color, [row, 5])
     end
   end
+
+  def inject_king(color, row, col = nil)
+    if col
+      board[row][col] = King.new(color, [row, col])
+    else
+      board[row][4] = King.new(color, [row, 4])
+    end
+  end
 end
