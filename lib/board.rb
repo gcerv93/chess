@@ -73,4 +73,12 @@ class Board
       board[row][4] = King.new(color, [row, 4])
     end
   end
+
+  def inject_queen(color, row, col = nil)
+    if col
+      board[row][col] = Queen.new(color, [row, col])
+    else
+      board[row][3] = Queen.new(color, [row, 3])
+    end
+  end
 end
