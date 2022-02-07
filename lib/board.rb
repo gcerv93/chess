@@ -14,9 +14,8 @@ class Board
   include Display
   attr_accessor :board
 
-  def initialize
-    @board = Array.new(8) { Array.new(8, '') }
-    # fill_board
+  def initialize(rows, cols)
+    @board = create_board(rows, cols)
   end
 
   # impliment UI at a later datee
@@ -30,8 +29,13 @@ class Board
   #   puts '    A  B  C  D  E  F  G  H'
   # end
 
-  def inject_pawns
-    board[1] = board[1].map.with_index { |_cell, idx| Pawn.new('white', [1, idx]) }
-    board[6] = board[6].map.with_index { |_cell, idx| Pawn.new('black', [6, idx]) }
+  def inject_pawns(row, color)
+    board[row] = board[row].map.with_index { |_cell, idx| Pawn.new(color, [row, idx]) }
+  end
+
+  private
+
+  def create_board(rows, cols)
+    Array.new(rows) { Array.new(cols, '') }
   end
 end
