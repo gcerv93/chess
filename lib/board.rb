@@ -20,7 +20,7 @@ class Board
 
   # impliment UI at a later datee
   # def display_board
-  #   colorize_board(board)
+  #   # colorize_board(board)
   #   n = 8
   #   board.each do |row|
   #     puts "#{n}  #{row[0]}#{row[1]}#{row[2]}#{row[3]}#{row[4]}#{row[5]}#{row[6]}#{row[7]}"

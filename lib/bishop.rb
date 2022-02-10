@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
-# class for the game rooks
-class Bishop
-  # initialize with instance variable @color to track color of pieces
-  def initialize(color, location)
-    @color = color
-    @location = location
-  end
+require_relative './piece'
 
+# class for the game bishops
+class Bishop < Piece
   def to_s
-    @color == 'white' ? "\u265d".bold : "\u265d".black
+    @color == 'white' ? " \u265d ".bold : " \u265d ".black
   end
 end
