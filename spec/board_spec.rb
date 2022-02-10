@@ -17,10 +17,10 @@ describe Board do
   end
 
   subject(:board) { described_class.new }
-  describe '#setup_trad_board' do
+  describe '#setup_board' do
     context 'sets up white pieces' do
       it 'sets up white pawns' do
-        board.setup_trad_board
+        board.setup_board
         color = board.board[7][0].instance_variable_get(:@color)
         expect(board.board[6][0].is_a?(Pawn)).to eq(true)
         expect(board.board[6][5].is_a?(Pawn)).to eq(true)
@@ -29,7 +29,7 @@ describe Board do
       end
 
       it 'sets up white rooks' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[7][0]
         right_end = board.board[7][7]
         color = board.board[7][7].instance_variable_get(:@color)
@@ -41,7 +41,7 @@ describe Board do
       end
 
       it 'sets up white knights' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[7][1]
         right_end = board.board[7][6]
         color = board.board[7][6].instance_variable_get(:@color)
@@ -53,7 +53,7 @@ describe Board do
       end
 
       it 'sets up white bishops' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[7][2]
         right_end = board.board[7][5]
         color = board.board[7][5].instance_variable_get(:@color)
@@ -65,7 +65,7 @@ describe Board do
       end
 
       it 'sets up white queen' do
-        board.setup_trad_board
+        board.setup_board
         queen = board.board[7][3]
         color = board.board[7][3].instance_variable_get(:@color)
         result = queen.is_a?(Queen)
@@ -74,7 +74,7 @@ describe Board do
       end
 
       it 'sets up white king' do
-        board.setup_trad_board
+        board.setup_board
         king = board.board[7][4]
         color = board.board[7][4].instance_variable_get(:@color)
         result = king.is_a?(King)
@@ -85,7 +85,7 @@ describe Board do
 
     context 'sets up black pieces' do
       it 'sets up black pawns' do
-        board.setup_trad_board
+        board.setup_board
         color = board.board[1][0].instance_variable_get(:@color)
         expect(board.board[1][0].is_a?(Pawn)).to eq(true)
         expect(board.board[1][5].is_a?(Pawn)).to eq(true)
@@ -94,7 +94,7 @@ describe Board do
       end
 
       it 'sets up black rooks' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[0][0]
         right_end = board.board[0][7]
         color = board.board[0][7].instance_variable_get(:@color)
@@ -106,7 +106,7 @@ describe Board do
       end
 
       it 'sets up black knights' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[0][1]
         right_end = board.board[0][6]
         color = board.board[0][6].instance_variable_get(:@color)
@@ -118,7 +118,7 @@ describe Board do
       end
 
       it 'sets up black bishops' do
-        board.setup_trad_board
+        board.setup_board
         left_end = board.board[0][2]
         right_end = board.board[0][5]
         color = board.board[0][5].instance_variable_get(:@color)
@@ -130,7 +130,7 @@ describe Board do
       end
 
       it 'sets up black queen' do
-        board.setup_trad_board
+        board.setup_board
         queen = board.board[0][3]
         color = board.board[0][3].instance_variable_get(:@color)
         result = queen.is_a?(Queen)
@@ -139,7 +139,7 @@ describe Board do
       end
 
       it 'sets up black king' do
-        board.setup_trad_board
+        board.setup_board
         king = board.board[0][4]
         color = board.board[0][4].instance_variable_get(:@color)
         result = king.is_a?(King)

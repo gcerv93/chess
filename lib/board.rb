@@ -13,9 +13,18 @@ require_relative './king'
 class Board
   include Display
   attr_accessor :board
+  attr_reader :pieces
 
   def initialize(rows = 8, cols = 8)
     @board = create_board(rows, cols)
+    @pieces = {
+      pawn: Pawn,
+      rook: Rook,
+      knight: Knight,
+      bishop: Bishop,
+      queen: Queen,
+      king: King
+    }
   end
 
   # impliment UI at a later datee
@@ -29,9 +38,9 @@ class Board
   #   puts '    A  B  C  D  E  F  G  H'
   # end
 
-  def setup_trad_board
-    white_pieces
-    black_pieces
+  def setup_board
+    setup_white_pieces
+    setup_black_pieces
   end
 
   private
@@ -40,68 +49,48 @@ class Board
     Array.new(rows) { Array.new(cols, '') }
   end
 
-  def inject_pawns(color, row)
-    board[row] = board[row].map.with_index { |_cell, idx| Pawn.new(color, [row, idx]) }
+  def setup_pawns(color, row)
+    board[row] = board[row].map.with_index { |_cell, idx| pieces[:pawn].new(color, [row, idx]) }
   end
 
-  def inject_rooks(color, row, col = nil)
-    if col
-      board[row][col] = Rook.new(color, [row, col])
-    else
-      board[row][0] = Rook.new(color, [row, 0])
-      board[row][7] = Rook.new(color, [row, 7])
-    end
+  def setup_rooks(color, row)
+    board[row][0] = pieces[:rook].new(color, [row, 0])
+    board[row][7] = pieces[:rook].new(color, [row, 7])
   end
 
-  def inject_knights(color, row, col = nil)
-    if col
-      board[row][col] = Knight.new(color, [row, col])
-    else
-      board[row][1] = Knight.new(color, [row, 1])
-      board[row][6] = Knight.new(color, [row, 6])
-    end
+  def setup_knights(color, row)
+    board[row][1] = pieces[:knight].new(color, [row, 1])
+    board[row][6] = pieces[:knight].new(color, [row, 6])
   end
 
-  def inject_bishops(color, row, col = nil)
-    if col
-      board[row][col] = Bishop.new(color, [row, col])
-    else
-      board[row][2] = Bishop.new(color, [row, 2])
-      board[row][5] = Bishop.new(color, [row, 5])
-    end
+  def setup_bishops(color, row)
+    board[row][2] = pieces[:bishop].new(color, [row, 2])
+    board[row][5] = pieces[:bishop].new(color, [row, 5])
   end
 
-  def inject_king(color, row, col = nil)
-    if col
-      board[row][col] = King.new(color, [row, col])
-    else
-      board[row][4] = King.new(color, [row, 4])
-    end
+  def setup_king(color, row)
+    board[row][4] = pieces[:king].new(color, [row, 4])
   end
 
-  def inject_queen(color, row, col = nil)
-    if col
-      board[row][col] = Queen.new(color, [row, col])
-    else
-      board[row][3] = Queen.new(color, [row, 3])
-    end
+  def setup_queen(color, row)
+    board[row][3] = pieces[:queen].new(color, [row, 3])
   end
 
-  def white_pieces
-    inject_pawns('white', 6)
-    inject_rooks('white', 7)
-    inject_knights('white', 7)
-    inject_bishops('white', 7)
-    inject_queen('white', 7)
-    inject_king('white', 7)
+  def setup_white_pieces
+    setup_pawns('white', 6)
+    setup_rooks('white', 7)
+    setup_knights('white', 7)
+    setup_bishops('white', 7)
+    setup_queen('white', 7)
+    setup_king('white', 7)
   end
 
-  def black_pieces
-    inject_pawns('black', 1)
-    inject_rooks('black', 0)
-    inject_knights('black', 0)
-    inject_bishops('black', 0)
-    inject_queen('black', 0)
-    inject_king('black', 0)
+  def setup_black_pieces
+    setup_pawns('black', 1)
+    setup_rooks('black', 0)
+    setup_knights('black', 0)
+    setup_bishops('black', 0)
+    setup_queen('black', 0)
+    setup_king('black', 0)
   end
 end
