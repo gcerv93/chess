@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/board'
+require './lib/board'
 
 # rubocop: disable Metrics/BlockLength
 describe Board do

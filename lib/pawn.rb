@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './piece'
+require './lib/piece'
 
 # class for the game pawns
 class Pawn < Piece

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require 'colorize'
-require_relative './display'
-require_relative './pawn'
-require_relative './rook'
-require_relative './knight'
-require_relative './bishop'
-require_relative './queen'
-require_relative './king'
+require './lib/display'
+require './lib/pawn'
+require './lib/rook'
+require './lib/knight'
+require './lib/bishop'
+require './lib/queen'
+require './lib/king'
 
 # class for the board display
 class Board
