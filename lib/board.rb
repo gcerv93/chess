@@ -27,17 +27,6 @@ class Board
     }
   end
 
-  # impliment UI at a later datee
-  # def display_board
-  #   # colorize_board(board)
-  #   n = 8
-  #   board.each do |row|
-  #     puts "#{n}  #{row[0]}#{row[1]}#{row[2]}#{row[3]}#{row[4]}#{row[5]}#{row[6]}#{row[7]}"
-  #     n -= 1
-  #   end
-  #   puts '    A  B  C  D  E  F  G  H'
-  # end
-
   def setup_board
     setup_white_pieces
     setup_black_pieces
@@ -45,8 +34,9 @@ class Board
 
   private
 
+  # create array with 3 blank spaces, for coloring of board
   def create_board(rows, cols)
-    Array.new(rows) { Array.new(cols, '') }
+    Array.new(rows) { Array.new(cols, '   ') }
   end
 
   def setup_pawns(color, row)
