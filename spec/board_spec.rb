@@ -18,133 +18,178 @@ describe Board do
 
   subject(:board) { described_class.new }
   describe '#setup_board' do
+    before do
+      board.instance_variable_set(:@pieces, {
+                                    pawn: class_double(Pawn),
+                                    rook: class_double(Rook),
+                                    knight: class_double(Knight),
+                                    bishop: class_double(Bishop),
+                                    queen: class_double(Queen),
+                                    king: class_double(King)
+                                  })
+      allow(board.pieces[:pawn]).to receive(:new)
+      allow(board.pieces[:rook]).to receive(:new).and_return(an_instance_of(Rook))
+      allow(board.pieces[:knight]).to receive(:new).and_return(an_instance_of(Knight))
+      allow(board.pieces[:bishop]).to receive(:new).and_return(an_instance_of(Bishop))
+      allow(board.pieces[:queen]).to receive(:new).and_return(an_instance_of(Queen))
+      allow(board.pieces[:king]).to receive(:new).and_return(an_instance_of(King))
+    end
+
     context 'sets up white pieces' do
-      it 'sets up white pawns' do
+      it 'sets up pawns' do
+        pawn = an_instance_of(Pawn)
+        allow(board.pieces[:pawn]).to receive(:new).and_return(pawn)
         board.setup_board
-        color = board.board[7][0].instance_variable_get(:@color)
-        expect(board.board[6][0].is_a?(Pawn)).to eq(true)
-        expect(board.board[6][5].is_a?(Pawn)).to eq(true)
-        expect(board.board[6][3].is_a?(Pawn)).to eq(true)
-        expect(color).to eq('white')
+        expect(board.board[6][0]).to eq(pawn)
       end
 
-      it 'sets up white rooks' do
-        board.setup_board
-        left_end = board.board[7][0]
-        right_end = board.board[7][7]
-        color = board.board[7][7].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Rook)
-        right_result = right_end.is_a?(Rook)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('white')
+      context 'sets up rooks' do
+        it 'on left side' do
+          rook = an_instance_of(Rook)
+          allow(board.pieces[:rook]).to receive(:new).and_return(rook)
+          board.setup_board
+          left_end = board.board[7][0]
+          expect(left_end).to eq(rook)
+        end
+
+        it 'on right side' do
+          rook = an_instance_of(Rook)
+          allow(board.pieces[:rook]).to receive(:new).and_return(rook)
+          board.setup_board
+          right_end = board.board[7][7]
+          expect(right_end).to eq(rook)
+        end
       end
 
-      it 'sets up white knights' do
-        board.setup_board
-        left_end = board.board[7][1]
-        right_end = board.board[7][6]
-        color = board.board[7][6].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Knight)
-        right_result = right_end.is_a?(Knight)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('white')
+      context 'sets up knights' do
+        it 'on left side' do
+          knight = an_instance_of(Knight)
+          allow(board.pieces[:knight]).to receive(:new).and_return(knight)
+          board.setup_board
+          left_side = board.board[7][1]
+          expect(left_side).to eq(knight)
+        end
+
+        it 'on right side' do
+          knight = an_instance_of(Knight)
+          allow(board.pieces[:knight]).to receive(:new).and_return(knight)
+          board.setup_board
+          right_side = board.board[7][6]
+          expect(right_side).to eq(knight)
+        end
       end
 
-      it 'sets up white bishops' do
-        board.setup_board
-        left_end = board.board[7][2]
-        right_end = board.board[7][5]
-        color = board.board[7][5].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Bishop)
-        right_result = right_end.is_a?(Bishop)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('white')
+      context 'sets up bishops' do
+        it 'on left side' do
+          bishop = an_instance_of(Bishop)
+          allow(board.pieces[:bishop]).to receive(:new).and_return(bishop)
+          board.setup_board
+          left_side = board.board[7][2]
+          expect(left_side).to eq(bishop)
+        end
+
+        it 'on right side' do
+          bishop = an_instance_of(Bishop)
+          allow(board.pieces[:bishop]).to receive(:new).and_return(bishop)
+          board.setup_board
+          right_side = board.board[7][5]
+          expect(right_side).to eq(bishop)
+        end
       end
 
       it 'sets up white queen' do
+        queen = an_instance_of(Queen)
+        allow(board.pieces[:queen]).to receive(:new).and_return(queen)
         board.setup_board
-        queen = board.board[7][3]
-        color = board.board[7][3].instance_variable_get(:@color)
-        result = queen.is_a?(Queen)
-        expect(result).to eq(true)
-        expect(color).to eq('white')
+        spot = board.board[7][3]
+        expect(spot).to eq(queen)
       end
 
       it 'sets up white king' do
+        king = an_instance_of(King)
+        allow(board.pieces[:king]).to receive(:new).and_return(king)
         board.setup_board
-        king = board.board[7][4]
-        color = board.board[7][4].instance_variable_get(:@color)
-        result = king.is_a?(King)
-        expect(result).to eq(true)
-        expect(color).to eq('white')
+        spot = board.board[7][4]
+        expect(spot).to eq(king)
       end
     end
 
     context 'sets up black pieces' do
-      it 'sets up black pawns' do
+      it 'sets up pawns' do
+        pawn = an_instance_of(Pawn)
+        allow(board.pieces[:pawn]).to receive(:new).and_return(pawn)
         board.setup_board
-        color = board.board[1][0].instance_variable_get(:@color)
-        expect(board.board[1][0].is_a?(Pawn)).to eq(true)
-        expect(board.board[1][5].is_a?(Pawn)).to eq(true)
-        expect(board.board[1][3].is_a?(Pawn)).to eq(true)
-        expect(color).to eq('black')
+        expect(board.board[1][0]).to eq(pawn)
       end
 
-      it 'sets up black rooks' do
-        board.setup_board
-        left_end = board.board[0][0]
-        right_end = board.board[0][7]
-        color = board.board[0][7].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Rook)
-        right_result = right_end.is_a?(Rook)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('black')
+      context 'sets up rooks' do
+        it 'on left side' do
+          rook = an_instance_of(Rook)
+          allow(board.pieces[:rook]).to receive(:new).and_return(rook)
+          board.setup_board
+          left_end = board.board[0][0]
+          expect(left_end).to eq(rook)
+        end
+
+        it 'on right side' do
+          rook = an_instance_of(Rook)
+          allow(board.pieces[:rook]).to receive(:new).and_return(rook)
+          board.setup_board
+          right_end = board.board[0][7]
+          expect(right_end).to eq(rook)
+        end
       end
 
-      it 'sets up black knights' do
-        board.setup_board
-        left_end = board.board[0][1]
-        right_end = board.board[0][6]
-        color = board.board[0][6].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Knight)
-        right_result = right_end.is_a?(Knight)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('black')
+      context 'sets up black knights' do
+        it 'on left side' do
+          knight = an_instance_of(Knight)
+          allow(board.pieces[:knight]).to receive(:new).and_return(knight)
+          board.setup_board
+          left_side = board.board[0][1]
+          expect(left_side).to eq(knight)
+        end
+
+        it 'on right side' do
+          knight = an_instance_of(Knight)
+          allow(board.pieces[:knight]).to receive(:new).and_return(knight)
+          board.setup_board
+          right_side = board.board[0][6]
+          expect(right_side).to eq(knight)
+        end
       end
 
-      it 'sets up black bishops' do
-        board.setup_board
-        left_end = board.board[0][2]
-        right_end = board.board[0][5]
-        color = board.board[0][5].instance_variable_get(:@color)
-        left_result = left_end.is_a?(Bishop)
-        right_result = right_end.is_a?(Bishop)
-        expect(left_result).to eq(true)
-        expect(right_result).to eq(true)
-        expect(color).to eq('black')
+      context 'sets up black bishops' do
+        it 'on left side' do
+          bishop = an_instance_of(Bishop)
+          allow(board.pieces[:bishop]).to receive(:new).and_return(bishop)
+          board.setup_board
+          left_side = board.board[0][2]
+          expect(left_side).to eq(bishop)
+        end
+
+        it 'on right side' do
+          bishop = an_instance_of(Bishop)
+          allow(board.pieces[:bishop]).to receive(:new).and_return(bishop)
+          board.setup_board
+          right_side = board.board[0][5]
+          expect(right_side).to eq(bishop)
+        end
       end
 
       it 'sets up black queen' do
+        queen = an_instance_of(Queen)
+        allow(board.pieces[:queen]).to receive(:new).and_return(queen)
         board.setup_board
-        queen = board.board[0][3]
-        color = board.board[0][3].instance_variable_get(:@color)
-        result = queen.is_a?(Queen)
-        expect(result).to eq(true)
-        expect(color).to eq('black')
+        spot = board.board[0][3]
+        expect(spot).to eq(queen)
       end
 
       it 'sets up black king' do
+        king = an_instance_of(King)
+        allow(board.pieces[:king]).to receive(:new).and_return(king)
         board.setup_board
-        king = board.board[0][4]
-        color = board.board[0][4].instance_variable_get(:@color)
-        result = king.is_a?(King)
-        expect(result).to eq(true)
-        expect(color).to eq('black')
+        spot = board.board[0][4]
+        expect(spot).to eq(king)
       end
     end
   end
