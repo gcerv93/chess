@@ -39,6 +39,20 @@ class Board
     Array.new(rows) { Array.new(cols, '   ') }
   end
 
+  # works for knights only at the moment
+  def check_availability(piece, moves)
+    available = []
+    moves.each do |move|
+      # check if the move is a 3-space-string
+      if board[move[0]][move[1]] == '   '
+        available << move
+      elsif board[move[0]][move[1]] != piece
+        available << move
+      end
+    end
+    available
+  end
+
   def setup_pawns(color, row)
     board[row] = board[row].map.with_index { |_cell, idx| pieces[:pawn].new(color, [row, idx]) }
   end
