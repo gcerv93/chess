@@ -11,8 +11,10 @@ class Knight < Piece
       move << location[1] + nums[1]
       moves << move unless check_moves(move)
     end
+    moves
   end
 
+  # do i really need this?
   def clear_moves
     moves.clear
   end
