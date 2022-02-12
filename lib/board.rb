@@ -32,6 +32,12 @@ class Board
     setup_black_pieces
   end
 
+  # Starting move_piece method, update later
+  def move_piece(piece)
+    piece_moves = piece.generate_moves
+    # display_board(check_availability(piece, piece_moves))
+  end
+
   private
 
   # create array with 3 blank spaces, for coloring of board

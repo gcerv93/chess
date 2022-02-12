@@ -193,6 +193,16 @@ describe Board do
       end
     end
   end
+
+  # Starting move_piece test, update_later
+  describe '#move_piece' do
+    it 'sends the message to piece object' do
+      piece = instance_double(Knight)
+      allow(piece).to receive(:generate_moves)
+      expect(piece).to receive(:generate_moves)
+      board.move_piece(piece)
+    end
+  end
 end
 
 # rubocop: enable Metrics/BlockLength
